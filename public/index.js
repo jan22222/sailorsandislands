@@ -8,7 +8,7 @@ const { username, room, quantity, landscape } = Qs.parse(location.search, {
 
 var users=[]
 
-var socket = io();
+var socket = io("https://sailorsandislands.herokuapp.com/");
 
 socket.on('init', handleInit);
 socket.on('gameState', handleGameState);
