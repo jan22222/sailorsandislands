@@ -1,0 +1,23 @@
+{
+  "name": "siedler",
+  "version": "1.0.0",
+  "description": "a game with vue and socket io",
+  "main": "index.js",
+  "scripts": {
+    "start": "node main",
+    "dev": "nodemon main"
+  },
+  "author": "Jan Weitzel",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "git": "^0.1.5",
+    "github": "^14.0.0",
+    "moment": "^2.29.1",
+    "socket.io": "^4.1.2",
+    "socket.io-client": "^4.1.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
