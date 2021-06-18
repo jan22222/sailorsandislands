@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en" >
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+      integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk="
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <title >SPACE SETTLERS</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Display:wght@700&family=Source+Sans+Pro:wght@700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        
+  </head>
+  <body style="background: rgb(107, 167, 223)" >
+    <div id="app">
+      <header  class="chat-header" style="background: rgb(28, 58, 192)">
+        <div><div style="  height: 80px;
+        width: 80px;
+        background-color: #bbb;
+        border-radius: 50%;"><img  id="scream" src="rocket.png" alt="Boat" width="44" height="54"></div>
+        <h1>Sailors & Islands</h1></div>
+        <h3> Game Name: {{room}}</h3>
+         
+          <h3><i class="fas fa-users"></i> </h3>
+          <ul id="users"style="width: 50%; display:flex;flex-direction:row;justify-content:space-around"><li v-for="(user, index) in userlisto" :class="[colors[index]]" :key="user.username"   >
+            {{ user.username}}
+          </li></ul>
+          <a id="leave-btn" class="btn" @click="leave">Leave Room</a>
+      </header>
+      <div class="flex-container" style="background: rgb(119,89,56);
+      background: linear-gradient(273deg, rgba(119,89,56,1) 0%, rgba(227,24,24,1) 100%,  rgba(227,24,24,1) 100%);">
+       
+        <counter texto="metals" :coun = "erz"  ></counter>
+        <counter texto="grains" :coun = "weizen"  ></counter>  
+        <counter texto="mud" :coun = "lehm"  ></counter>
+        <counter texto="sheep" :coun = "schaf"  ></counter>
+        <counter texto="wood" :coun = "holz"  ></counter>
+        <counter texto="draw" :coun = "Wurf"  ></counter>
+      </div>
+      <div class="flex-container">  
+       
+    <div class="chat-container">
+     
+      <main class="chat-main">
+     
+        <div class="chat-messages"></div>
+      </main>
+      <div class="chat-form-container">
+        <form id="chat-form" v-on:submit.prevent="onSubmit">
+          <input
+            id="msg"
+            type="text"
+            placeholder="Enter Message"
+            required
+            autocomplete="off"
+          />
+          <button class="btn" ><i class="fas fa-paper-plane"></i> Send</button>
+        </form>
+      </div>
+    </div>
+    <div class="wrapper-game"style=" width:1400px; height:1250px;  ">
+      <canvas id='my-canvas' style=" width: 1250px; border: 5px double rgb(27, 28, 29); margin-right:20px; border-radius: 100px;"></canvas>
+      </div>
+      <div class="flex-container" style="flex-direction: column; width: 200px">
+        <div><h1>Player at turn: {{comp}}</h1>
+         
+    <counter texto="remaining time" :coun = "time"  ></counter>
+    <counter texto="points" :coun = "points"  ></counter>
+    
+      <div style="width:250px;"><h1>set a boat, </h1>
+        <h1>double: big boat:</h1>
+        <button @click="houseBuilder" type="button" class="btn btn-primary btn-lg" style="font-size:200px">+</button>         
+      </div>
+      </div>
+     
+    </div>
+  </div>
+  <div class="flex-container"style="background-color: white">
+      
+  </div>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.9.2/qs.min.js"
+      integrity="sha256-TDxXjkAUay70ae/QJBEpGKkpVslXaHHayklIVglFRT4="
+      crossorigin="anonymous"
+    ></script>
+    <script src="./space.js">
+    </script>
+    <script src="./socket.io/socket.io.js"></script>
+    <script src="./index.js"></script>
+
+  </body>
+
+
+  <footer style="height:500px;padding: 30px;color: rgb(233, 233, 243); background: rgb(27, 28, 29); ">
+      <center>
+      C Jan Weitzel 2021
+</center>
+  </footer>
+</html>
+
+
+<script>
+//vue part
+
+
+var  app = new Vue({
+   el: '#app',
+   data: {
+     Wurf: Number,
+      usernumber: Number,
+     erz:0,weizen:0,lehm:0,schaf:0,holz:0,points:0,
+      userlisto: [],
+       username: username,
+     room:"",
+      colors: ["red","green" ,"blue","tomato","	pink"],
+      time: 666,
+      recPlayer: Number,
+      // colorOfTimeCount: {'border-color':"black"},
+      // styleColor: {
+      //   type: String,  
+      //   'default': 'blue'}
+      // },
+      // styleO:{
+      //   "border" : "20px solid blue"
+      // }
+   },
+   computed:{
+     compOwnUsername: function(){
+       return username
+     },
+     comp: function(){
+      let variable = this.userlisto.map(el=>el.username)
+      return variable[(this.recPlayer)-1]
+     },
+    classControl: function(index){
+      if (this.recPlayer==index){
+        return {underlined: true}
+      }
+      return {underlined: false}
+    }
+   },
+   methods: {
+     houseBuilder: function(){
+       houseBuild()
+     },
+     onSubmit: function(e){
+        chatten(e)
+     },
+     leave: function(){
+              const leaveRoom = confirm('Are you sure you want to leave the chatroom?');
+          if (leaveRoom) {
+            window.location = '../index.html';
+          } else {
+          }
+     }
+   }
+
+});
+Vue.component('counter', {
+  
+  props: {
+      activeC: {
+        type: String,
+        default:"red"
+      } ,
+      texto:
+      {
+        type: String,
+        default:"default"
+      },
+      coun:{
+        type: Number,
+        default: 0
+      },
+      styleColor: {
+        type: String,  
+        'default': 'blue',
+      }
+    },
+  template: `
+  <div  ><h1> {{texto}} </h1>
+      <div class="round-item" v-bind:style="{styleO}" ><div class="inside-item"><p>{{coun}}</p> </div></div>
+    </div>
+  `
+})
+</script>
