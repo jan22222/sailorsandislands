@@ -27,6 +27,7 @@ li{
 
 
 body {
+	color:rgb(24, 1, 1)
 	font-family: 'Roboto', sans-serif;
 	font-size: 16px;
 	background: var(--light-color);
@@ -44,8 +45,8 @@ a {
 .btn {
 	cursor: pointer;
 	padding: 5px 15px;
-	background: var(--light-color);
-	color: var(--dark-color-a);
+	background: rgb(59, 36, 6);
+	color: rgb(248, 236, 236);
 	border: 0;
 	font-size: 17px;
 }
@@ -98,7 +99,7 @@ a {
 
 .chat-header {
 	background: var(--dark-color-a);
-	color: #fff;
+	color: rgb(24, 1, 1);
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
 	padding: 15px;
@@ -179,22 +180,22 @@ a {
 
 /* Join Page */
 .join-container {
-	max-width: 500px;
-	margin: 80px auto;
-	color: #fff;
+	
+	margin: 5px auto;
+	
 }
 
 .join-header {
 	text-align: center;
 	padding: 20px;
-	background: var(--dark-color-a);
+	background: brown
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
 }
 
 .join-main {
 	padding: 30px 40px;
-	background: var(--dark-color-b);
+	background: burlywood
 }
 
 .join-main p {

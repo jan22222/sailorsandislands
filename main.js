@@ -193,7 +193,7 @@ function startGameInterval(room, map, user) {
       // deleteRoom(state, map, user)
       clearInterval(intervalId);
     }
-  }, 500 );
+  }, 1000 );
 }
 function gameLoop(roomState,map,user){
   console.log('gameLoop, which watches for a winner')
