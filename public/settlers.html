@@ -22,29 +22,51 @@
     <div id="app">
       <header  class="chat-header" style="background: rgb(28, 58, 192)">
         <div><div style="  height: 80px;
-        width: 80px;
+        width: 80px; box-shadow: 10px 10px 5px rgba(72, 72, 77, 0.5);
         background-color: #bbb;
         border-radius: 50%;"><img  id="scream" src="rocket.png" alt="Boat" width="44" height="54"></div>
-        <h1>Sailors & Islands</h1></div>
-        <h3> Game Name: {{room}}</h3>
+        <h1>Sailors & Islands</h1><h3> Game Name: {{room}}</h3></div>
+        
          
           <h3><i class="fas fa-users"></i> </h3>
           <ul id="users"style="width: 50%; display:flex;flex-direction:row;justify-content:space-around"><li v-for="(user, index) in userlisto" :class="[colors[index]]" :key="user.username"   >
             {{ user.username}}
           </li></ul>
-          <a id="leave-btn" class="btn" @click="leave">Leave Room</a>
+          <button type="button" class="btn btn-outline-danger btn-lg" onclick="reject()"  onclick="reject()" style="margin: 30px;">Leave Room</button>
       </header>
-      <div class="flex-container" style="background: rgb(119,89,56);
-      background: linear-gradient(273deg, rgba(119,89,56,1) 0%, rgba(227,24,24,1) 100%,  rgba(227,24,24,1) 100%);">
-       
-        <counter texto="metals" :coun = "erz"  ></counter>
-        <counter texto="grains" :coun = "weizen"  ></counter>  
-        <counter texto="mud" :coun = "lehm"  ></counter>
-        <counter texto="sheep" :coun = "schaf"  ></counter>
-        <counter texto="wood" :coun = "holz"  ></counter>
-        <counter texto="draw" :coun = "Wurf"  ></counter>
+
+      <div id="modal" class="modal">
+        <div style="display: flex; flex-direction: column; align-items: center;">
+        <div style="  height: 500px;
+          width: 500px;
+          color: rgb(212, 194, 194);
+          background-color: rgb(212, 194, 194);
+          border-radius: 50%;"><img src="rocket.png" alt="Boat" width="330" height="440">
+        </div>
+          <h1>Sailors & Islands</h1>
+        </div>
+    
+        <div style="  height: 500px;
+            width: 800px; display:flex; flex-direction:column; align-items: center;">
+              <h1 class="blinking" style="font-size: 100px; ">Waiting. Don't reload browser!</h1>
+              <button type="button" class="btn btn-outline-danger btn-lg" onclick="reject()" >Leave game</button>
+        </div>
+        
       </div>
-      <div class="flex-container">  
+
+      <div class="flex-container" style="background: rgb(119,89,56);box-shadow: 10px 10px 5px rgba(72, 72, 77, 0.5);
+      background: linear-gradient(273deg, rgba(119,89,56,1) 0%, rgba(227,24,24,1) 100%,  rgba(227,24,24,1) 100%);
+      background: url('https://www.decore.com/Cms_Data/Contents/Decore/Media/Materials/Rubberwood_wL.jpg'); " >
+       
+       <counter texto="metals" :coun = "erz" borcolor="grey"  ></counter>
+       <counter texto="grains" :coun = "weizen"  borcolor="yellow" ></counter>  
+       <counter texto="mud" :coun = "lehm" borcolor="brown"  ></counter>
+       <counter texto="sheep" :coun = "schaf"  borcolor="lightgreen" ></counter>
+       <counter texto="wood" :coun = "holz" borcolor="green"  ></counter>
+     
+        <div style="border: 5px double rgb(27, 28, 29); background: red; padding: 5px; ">  <counter texto="draw" :coun = "Wurf"  borcolor="white" ></counter></div>
+      </div>
+      <div class="flex-container" style="background: url('https://www.decore.com/Cms_Data/Contents/Decore/Media/Materials/Rubberwood_wL.jpg'); ">  
        
     <div class="chat-container">
      
@@ -68,11 +90,12 @@
     <div class="wrapper-game"style=" width:1400px; height:1250px;  ">
       <canvas id='my-canvas' style=" width: 1250px; border: 5px double rgb(27, 28, 29); margin-right:20px; border-radius: 100px;"></canvas>
       </div>
-      <div class="flex-container" style="flex-direction: column; width: 200px">
-        <div><h1>Player at turn: {{comp}}</h1>
-         
-    <counter texto="remaining time" :coun = "time"  ></counter>
-    <counter texto="points" :coun = "points"  ></counter>
+      <div class="flex-container" style="flex-direction: column; width: 300px; border: 5px double rgb(27, 28, 29); background: url('https://www.decore.com/Cms_Data/Contents/Decore/Media/Materials/Rubberwood_wL.jpg'); background-blend-mode: screen;">
+        <div style="border: 5px double rgb(27, 28, 29); background: red;"><h1>Player at turn: {{comp}}</h1></div>
+        <div>
+              
+          <counter texto="remaining time" :coun = "time"  ></counter>
+          <counter texto="points" :coun = "points"  ></counter>
     
       <div style="width:250px;"><h1>set a boat, </h1>
         <h1>double: big boat:</h1>
@@ -98,7 +121,7 @@
   </body>
 
 
-  <footer style="height:500px;padding: 30px;color: rgb(233, 233, 243); background: rgb(27, 28, 29); ">
+  <footer style="background: url('https://www.decore.com/Cms_Data/Contents/Decore/Media/Materials/Rubberwood_wL.jpg'); background-blend-mode: darken;height:500px;padding: 30px;color: rgb(233, 233, 243); background: rgb(27, 28, 29); ">
       <center>
       C Jan Weitzel 2021
 </center>
@@ -146,6 +169,9 @@ var  app = new Vue({
       return {underlined: false}
     }
    },
+   mounted(){
+    showModal("Waiting for incoming players...", true);
+   },
    methods: {
      houseBuilder: function(){
        houseBuild()
@@ -163,12 +189,12 @@ var  app = new Vue({
    }
 
 });
+
 Vue.component('counter', {
-  
   props: {
-      activeC: {
+    borcolor: {
         type: String,
-        default:"red"
+        default: 'white'
       } ,
       texto:
       {
@@ -178,16 +204,15 @@ Vue.component('counter', {
       coun:{
         type: Number,
         default: 0
-      },
-      styleColor: {
-        type: String,  
-        'default': 'blue',
       }
     },
   template: `
   <div  ><h1> {{texto}} </h1>
-      <div class="round-item" v-bind:style="{styleO}" ><div class="inside-item"><p>{{coun}}</p> </div></div>
+      <div class="round-item"  >
+        <div class="inside-item" v-bind:style="{background: borcolor}"><p>{{coun}}</p>
+           </div></div>
     </div>
   `
 })
+
 </script>

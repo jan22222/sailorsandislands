@@ -168,7 +168,7 @@ const botName = 'AutoBot';
 
 function startGameInterval(room, map, user) {
   console.log('start game interval, set game active')
-
+  
   gameActive=true;
   state[room].turnTime = timeGetter();
   console.log("set time", state[room].turnTime )
@@ -197,7 +197,8 @@ function startGameInterval(room, map, user) {
 }
 function gameLoop(roomState,map,user){
   console.log('gameLoop, which watches for a winner')
-
+  io.to(user.room).emit('killModal');
+  console.log("killed modal")
     if (watchForWinner(roomState)){
       console.log('winner exists')
       

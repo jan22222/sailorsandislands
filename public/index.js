@@ -8,8 +8,8 @@ const { username, room, quantity, landscape } = Qs.parse(location.search, {
 
 var users=[]
 
-var socket = io("https://sailorsandislands.herokuapp.com/");
-
+var socket = io();
+// "localhost:8000 || https://sailorsandislands.herokuapp.com/"
 socket.on('init', handleInit);
 socket.on('gameState', handleGameState);
 socket.on('gameOver', handleGameOver);
@@ -17,7 +17,9 @@ socket.on('gameOver', handleGameOver);
 socket.on('unknownCode', handleUnknownCode);
 socket.on('tooManyPlayers', handleTooManyPlayers);
 socket.on('leave',()=>{window.location = '../index.html';})
-
+socket.on('showModal', showModal)
+socket.on('killModal',killModal)
+socket.on('leaveGame', leaveGame)
 socket.on('roomUsers', ({ room, users }) => {  
   this.users = users; console.log("changed users, roomUsers",this.users)
   app.$data.userlisto = this.users; 
@@ -124,7 +126,7 @@ socket.on('message', (message) => {
   
   outputMessage(message);
   // Scroll down
-  chatMessages.scrollTop = chatMessages.scrollHeight;
+  // chatMessages.scrollTop = chatMessages.scrollHeight;
 });
 
 function houseBuild()
@@ -166,7 +168,25 @@ function outputMessage(message) {
 function outputRoomName(room) {
   app.$data.room = room;
 }
+function leaveGame(){
+  window.location.replace("http://www.w3schools.com");
+}
+function showModal(message, buttonOpt) {
+  modal = document.getElementById("modal");
+  modal.style.display = "flex";
+	modal.style.flexDirection = "row";
+	modal.style.justifyContent = "space-around";
+	modal.style.alignItems = "flex-start";
+  modal.children[1].children[0].innerText = message
+  console.log("button", buttonOpt,modal.children[1].children[1].display)
+  if(buttonOpt) {modal.children[1].children[1].style.display = 'block'}
+  if(!buttonOpt) {modal.children[1].children[1].style.display = 'none'}
+}
 
+function killModal() {
+  modal = document.getElementById("modal");
+  modal.style.display = "none";
+}
 // Add users to DOM
 
 

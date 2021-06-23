@@ -12,6 +12,7 @@
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
+	
 }
 
 li{
@@ -49,7 +50,39 @@ a {
 	border: 0;
 	font-size: 17px;
 }
+.blinking {
+	animation: blinkingText 2s infinite;
+	
+	
+}
+/* modal */
+.modal {
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	padding-top: 100px; /* Location of the box */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgb(35, 192, 212); /* Fallback color */
+	background-image: url("http://wallup.net/wp-content/uploads/2016/01/295211-sea-landscape-clouds-beach-boat.jpg") ;
+	background-blend-mode: darken;
+	background-repeat: no-repeat;
+    background-size: contain;
+	
+	color: rgb(212, 194, 194);
+}
+@keyframes blinkingText {
 
+	0% {
+		opacity: 0.2;
+	}
+	100% {
+		opacity: 1;
+	}
+} 
 .flex-container{
 	display: flex;
 	flex-direction: row;
@@ -57,7 +90,7 @@ a {
 	width:100%;
 	align-items: center;
 	padding: 20px;
-
+	box-shadow: 10px 10px 5px rgba(72, 72, 77, 0.5);
 }
 .round-item{
 	background-image: url("../Wood.jpg");
@@ -77,16 +110,24 @@ a {
 .inside-item{
 	background: white;
 	padding:30px;
-	height: 150px;
-	width: 150px;
+	height: 100px;
+	width: 100px;
 	border-radius: 50%;
 	font-size: 100px;
-	color: rgb(18, 11, 95);
+	
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
-
+.btn {
+	cursor: pointer;
+	padding: 5px 15px;
+	background: rgb(236, 98, 86);
+	color: rgb(248, 236, 236);
+	border: 0;
+	font-size: 17px;
+	
+}
 /* Chat Page */
 
 .chat-container {
@@ -94,6 +135,7 @@ a {
 	background: rgb(255, 255, 255);
 	margin: 50px ;
 	overflow: hidden;
+	box-shadow: 10px 10px 5px rgba(72, 72, 77, 0.5);
 }
 
 .chat-header {
