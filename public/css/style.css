@@ -12,7 +12,7 @@
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
-	
+	font-family: 'Viaoda Libre', cursive;
 }
 
 li{
@@ -25,7 +25,8 @@ li{
 .blue{ color: DodgerBlue; }
 .tomato{color:tomato}
 .pink{color:pink}
-
+.active{background:#e6e9ff}
+.active2{background: pink}
 
 body {
 	font-family: 'Roboto', sans-serif;
@@ -106,6 +107,7 @@ a {
 	justify-content: center;
 	align-items: center;
 	border:20px solid;
+	box-shadow: 10px 10px 5px rgba(72, 72, 77, 0.5);
 }
 .inside-item{
 	background: white;

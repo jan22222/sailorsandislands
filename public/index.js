@@ -13,7 +13,8 @@ var socket = io();
 socket.on('init', handleInit);
 socket.on('gameState', handleGameState);
 socket.on('gameOver', handleGameOver);
-
+socket.on('gameEnder', ()=>{console.log("game ender info"); 
+gameEnder();})
 socket.on('unknownCode', handleUnknownCode);
 socket.on('tooManyPlayers', handleTooManyPlayers);
 socket.on('leave',()=>{window.location = '../index.html';})
@@ -169,7 +170,7 @@ function outputRoomName(room) {
   app.$data.room = room;
 }
 function leaveGame(){
-  window.location.replace("http://www.w3schools.com");
+  window.location.replace("../index.html");
 }
 function showModal(message, buttonOpt) {
   modal = document.getElementById("modal");
@@ -181,6 +182,11 @@ function showModal(message, buttonOpt) {
   console.log("button", buttonOpt,modal.children[1].children[1].display)
   if(buttonOpt) {modal.children[1].children[1].style.display = 'block'}
   if(!buttonOpt) {modal.children[1].children[1].style.display = 'none'}
+}
+function gameEnder(){
+  // console.log("game ender")
+  // showModal("A player left the game. Game ends.", true)
+  leaveGame()
 }
 
 function killModal() {

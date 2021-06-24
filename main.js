@@ -63,8 +63,7 @@ io.on('connection', socket => {
   // Runs when client disconnects
   socket.on('disconnect', () => {
     console.log("start disconn", username)
-    deletePlayerFromState(state,user)
-    console.log("deleted player from state")
+    
      userx = userLeave(socket.id);
     if (userx) {
       io.to(userx.room).emit(
@@ -173,7 +172,10 @@ function startGameInterval(room, map, user) {
   state[room].turnTime = timeGetter();
   console.log("set time", state[room].turnTime )
   const intervalId = setInterval(() => {
-
+    let allPlayers = getRoomUsers(user.room);
+    const quantity = state[user.room].quantity
+    if (quantity > allPlayers.length)
+    {clearInterval(intervalId); io.to(user.room).emit('gameEnder'); }
     console.log('check for winner')
     //???
     const winner = gameLoop(state[room],map, user);
