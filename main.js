@@ -281,7 +281,7 @@ function neuerWurf(roomState, map,user){
   var prngx = generator()
   const num2 = Math.floor((prngx* 5) + 1);
   roomState.Wurf = num+num2
-  distributeResources(map[user.room], num, user)
+  distributeResources(map[user.room], roomState.Wurf, user)
   // io.to(user.room).emit('warningMessage', (message))
 }
 function distributeResources(roomMap, num, user)
@@ -292,7 +292,7 @@ function distributeResources(roomMap, num, user)
     //go through array and value each item out
     areas.forEach(element => {
       if (element.res<6){
-        console.log("area ",element)
+        console.log("a")
       let places = findPlacesAroundArea(element.index)
       places.forEach(place => {
         console.log("place ", place)
@@ -398,7 +398,7 @@ function enoughResourcesHouse(state, user)
       return ret
   }
   var  number = keyByVal(state[user.room], user.id)
-  if(state[user.room].net[id].value == 0&&enoughResourcesHouse(state, user)){
+  if(state[user.room].net[id].value == 0 && enoughResourcesHouse(state, user)){
       state[user.room].net[id].playerNumber = number;
       state[user.room].net[id].value = 1;
       state[user.room][number].points++;

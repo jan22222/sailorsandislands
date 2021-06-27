@@ -32,6 +32,7 @@
          
         <h1>Player at turn: </h1>
           <ul :class="{active:true}" id="users"style="width: 50%; display:flex;flex-direction:row;justify-content:space-around"><li style="color:black" v-for="(user, index) in userlisto" :class="{'active2':isClassActive(index)}"  :key="user.username"   >
+            <div v-if="isClassActive(index)" style="font-size: 60px; display: inline; color:red"> &gt;&gt; </div>
             <img src="http://images.clipartpanda.com/seahorse-silhouette-free-vector-seahorse-silhouette-clip-art_119206_Seahorse_Silhouette_clip_art_small.png" :class="[colors[index]]">
             {{ user.username}}
           </li></ul>
@@ -48,7 +49,7 @@
         </div>
           <h1>Sailors & Islands</h1>
         </div>
-    
+        
         <div style="  height: 500px;
             width: 800px; display:flex; flex-direction:column; align-items: center;">
               <h1 class="blinking" style="font-size: 100px; ">Waiting. Don't reload browser!</h1>
@@ -60,6 +61,7 @@
       <div class="flex-container" style="background: rgb(119,89,56);box-shadow: 10px 10px 5px rgba(72, 72, 77, 0.5);
       background: linear-gradient(273deg, rgba(119,89,56,1) 0%, rgba(227,24,24,1) 100%,  rgba(227,24,24,1) 100%);
       background: url('https://www.decore.com/Cms_Data/Contents/Decore/Media/Materials/Rubberwood_wL.jpg'); " >
+      <span :style="{background : colors[usernumber-1] } " style="overflow-x: hidden; border: 5px double black; font-size: 75px; height:350px; width:350px; border-radius: 50%; color:white; display: flex; align-items:center;justify-content:center;"><center>{{username}}</center></span>
        
        <counter texto="metals" :coun = "erz" borcolor="grey"  ></counter>
        <counter texto="grains" :coun = "weizen"  borcolor="yellow" ></counter>  
@@ -95,7 +97,8 @@
       </div>
       <div class="flex-container" style="flex-direction: column; width: 300px; border: 5px double rgb(27, 28, 29); background: url('https://www.decore.com/Cms_Data/Contents/Decore/Media/Materials/Rubberwood_wL.jpg'); background-blend-mode: screen;">
       <!-- <div  style="font-size:25px ; color: rgb(65, 46, 8)"> {{message}}</div> -->
-        <button type="btn btn-lg btn-light" v-if="(recPlayer)==usernumber" @Click="showReady" style="font-size:40px">SKIP </button>
+      <span v-if="(recPlayer)==usernumber" :style="{color : colors[usernumber-1] } " style="font-size:45px;border-radius: 10%; padding: 30px;  background-color: rgb(1, 8, 22);" class="blinking">Your turn!</span>
+        <button type="btn btn-lg btn-light" v-if="(recPlayer)==usernumber" @Click="showReady" style="font-size:40px; margin: 10px;">SKIP </button>
 
         <div>
               
@@ -126,7 +129,7 @@
   </body>
 
 
-  <footer style="background: url('https://www.decore.com/Cms_Data/Contents/Decore/Media/Materials/Rubberwood_wL.jpg'); background-blend-mode: darken;height:500px;padding: 30px;color: rgb(233, 233, 243); background: rgb(27, 28, 29); ">
+  <footer style="background: url('https://www.decore.com/Cms_Data/Contents/Decore/Media/Materials/Rubberwood_wL.jpg'); background-blend-mode: darken;height:500px;color: rgb(233, 233, 243); background: rgb(24, 65, 107); ">
       <center>
       C Jan Weitzel 2021
 </center>
