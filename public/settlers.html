@@ -31,8 +31,8 @@
         
          
         <h1>Player at turn: </h1>
-          <ul :class="{active:true}" id="users"style="width: 50%; display:flex;flex-direction:row;justify-content:space-around"><li v-for="(user, index) in userlisto" :class="[colors[index]]" :key="user.username"   >
-            <img src="http://images.clipartpanda.com/seahorse-silhouette-free-vector-seahorse-silhouette-clip-art_119206_Seahorse_Silhouette_clip_art_small.png" alt="Playername">
+          <ul :class="{active:true}" id="users"style="width: 50%; display:flex;flex-direction:row;justify-content:space-around"><li style="color:black" v-for="(user, index) in userlisto" :class="{'active2':isClassActive(index)}"  :key="user.username"   >
+            <img src="http://images.clipartpanda.com/seahorse-silhouette-free-vector-seahorse-silhouette-clip-art_119206_Seahorse_Silhouette_clip_art_small.png" :class="[colors[index]]">
             {{ user.username}}
           </li></ul>
           <button type="button" class="btn btn-outline-danger btn-lg" onclick="reject()"  onclick="reject()" style="margin: 30px;">Leave Room</button>
@@ -94,7 +94,9 @@
       <canvas id='my-canvas' style=" width: 1250px; border: 5px double rgb(27, 28, 29); margin-right:20px; border-radius: 100px;"></canvas>
       </div>
       <div class="flex-container" style="flex-direction: column; width: 300px; border: 5px double rgb(27, 28, 29); background: url('https://www.decore.com/Cms_Data/Contents/Decore/Media/Materials/Rubberwood_wL.jpg'); background-blend-mode: screen;">
-        <div style="border: 5px double rgb(27, 28, 29); background: red;"></div>
+      <!-- <div  style="font-size:25px ; color: rgb(65, 46, 8)"> {{message}}</div> -->
+        <button type="btn btn-lg btn-light" v-if="(recPlayer)==usernumber" @Click="showReady" style="font-size:40px">SKIP </button>
+
         <div>
               
           <counter texto="remaining time" :coun = "time"  ></counter>
@@ -140,22 +142,15 @@ var  app = new Vue({
    el: '#app',
    data: {
      Wurf: Number,
-      usernumber: Number,
+     usernumber: Number,
      erz:0,weizen:0,lehm:0,schaf:0,holz:0,points:0,
-      userlisto: [],
-       username: username,
+     userlisto: [],
+     username: username,
      room:"",
-      colors: ["red","green" ,"blue","tomato","	pink"],
-      time: 666,
-      recPlayer: Number,
-      // colorOfTimeCount: {'border-color':"black"},
-      // styleColor: {
-      //   type: String,  
-      //   'default': 'blue'}
-      // },
-      // styleO:{
-      //   "border" : "20px solid blue"
-      // }
+     colors: ["red","green" ,"blue","tomato","pink"],
+     time: 666,
+     recPlayer: Number,
+     message: String
    },
    computed:{
      compOwnUsername: function(){
@@ -176,6 +171,14 @@ var  app = new Vue({
     showModal("Waiting for incoming players...", true);
    },
    methods: {
+     showReady: function(){
+       showReady()
+     },
+
+    isClassActive: function(index){
+      if((this.recPlayer)-1==index) return true
+      return false
+    },
      houseBuilder: function(){
        houseBuild()
      },

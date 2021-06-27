@@ -332,36 +332,37 @@ var triangleY = canvas.height / 2 - triangleWidth / 2;
 
 }
 function villazeichnen(color,id){
+   
   
-  this.color=color;
- 
-  this.id=id;
- 
-  ctx.fillStyle = this.color;
- ctx.strokeStyle="orange";
-  aktpunkt1=Netz[trans[id]-1];
-
-  ctx.beginPath();
-  ctx.arc(aktpunkt1.x, aktpunkt1.y, 30, 0, 2 * Math.PI);
-  
-  ctx.fill();        
-  ctx.stroke();
-  
-
-
-
-
-
-  var img = document.getElementById("scream");
- ctx.drawImage(img, aktpunkt1.x-20, aktpunkt1.y-15);
- ctx.closePath();
-  var grd;
-var triangleWidth = 20;
-var triangleHeight = 10;
-var triangleY = canvas.height / 2 - triangleWidth / 2;
-
-//drawTriangle(ctx, aktpunkt.x, aktpunkt.y-20, triangleWidth, triangleHeight, color);
-
+        this.color=color;
+       
+        this.id=id;
+       
+        ctx.fillStyle = this.color;
+       ctx.strokeStyle="black";
+        aktpunkt1=Netz[trans[id]-1];
+    
+        ctx.beginPath();
+        ctx.arc(aktpunkt1.x, aktpunkt1.y, 30, 0, 2 * Math.PI);
+        
+        ctx.fill();        
+        ctx.stroke();
+        
+      
+    
+    
+    
+    
+        var img = document.getElementById("scream");
+        ctx.globalAlpha = 1;
+       ctx.drawImage(img, aktpunkt1.x-23, aktpunkt1.y-28,44,54);
+       ctx.closePath();
+        var grd;
+    var triangleWidth = 20;
+    var triangleHeight = 10;
+    var triangleY = canvas.height / 2 - triangleWidth / 2;
+    
+    
 }
 function findID(aktpunkt){
     //transrückwärts auswerten um den richtigen ort zu finden
@@ -510,32 +511,32 @@ for(let i = 1; i < 12; i++){
     var res = map[this.zaehler].res;
     var num=map[this.zaehler].num;
     switch (res) {
-            //Lehm
+            //metals
         case 1:
-        day = "	#9c7e00";
+        day = "grey";
         break;
         //weizen
         case 2:
-        day = "	#dbdb00";
+        day = "yellow";
         break;
         case 3:
-        //schaf
-        day = "	#a5d02a";
+        //mud
+        day = "brown";
         break;
         case 4:
-        //holz
-        day = "darkgreen";
+        //sheep
+        day = "lightgreen";
         break;
         case 5:
-        //Erz
-        day = "#838383";
+        //wood
+        day = "green";
         break;
         //water
         case 6:
-        day = "#000000";
+        day = "blue";
         //desert
         case 7:
-        day = "#666600"
+        day = "lightyellow"
     }
 
  

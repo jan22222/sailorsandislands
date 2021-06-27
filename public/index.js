@@ -21,6 +21,8 @@ socket.on('leave',()=>{window.location = '../index.html';})
 socket.on('showModal', showModal)
 socket.on('killModal',killModal)
 socket.on('leaveGame', leaveGame)
+socket.on('warningMessage', (message)=>{ app.$data.message  = message  })
+
 socket.on('roomUsers', ({ room, users }) => {  
   this.users = users; console.log("changed users, roomUsers",this.users)
   app.$data.userlisto = this.users; 
@@ -70,20 +72,22 @@ function handleGameState(gameState) {
 }
 
 function handleGameOver(data) {
-  if (!gameActive) {
-    return;
-  }
+  
   data = JSON.parse(data);
 
   gameActive = false;
-
-  if (data.winner === playerNumber) {
+  const usernumber = Object.keys(state).find(key=>state[key].clientID==socket.id)
+  if (data.winner == usernumber) {
     alert('You Win!');
   } else {
     alert('You Lose :(');
   }
 }
-
+function showReady(){
+  // const usernumber = Object.keys(state).find(key=>state[key].clientID==socket.id)
+  console.log("emits ready")
+  socket.emit('ready', 1)
+}
 function handleUnknownCode() {
   alert('Unknown Game Code')
   reject();
@@ -98,22 +102,28 @@ function reject(){
   window.location = '../index.html';
 }
  
+
 if( typeof quantity === 'undefined'){//only a join
   console.log("joinroom")
-  socket.emit('joinRoom', {username,room})
+  socket.emit('tryJoinRoom', {username,room})
 }
 else {//then a create
   console.log("createroom")
   socket.emit('createRoom', {username,room,quantity,landscape})
 }
-//Responses must be positive to continue, otherwise reject.
- const SR = {}
+
+socket.on('roomPermitance', (username, room)=>{
+  console.log("after permitance trying to join as ", username, " in room", room )
+  socket.emit('joinRoom',{username,room})
+})
+
+const SR = {};
 
  socket.on('stateInfo',
   (stateRoom)=>{
 
     SR = stateRoom;
-  });
+  })
 
     // Get room and users
 socket.on('roomUsers', ({ room, users }) => {
@@ -170,6 +180,7 @@ function outputRoomName(room) {
   app.$data.room = room;
 }
 function leaveGame(){
+  alert('You will leave game!');
   window.location.replace("../index.html");
 }
 function showModal(message, buttonOpt) {

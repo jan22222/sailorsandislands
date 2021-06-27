@@ -14,6 +14,7 @@
     "git": "^0.1.5",
     "github": "^14.0.0",
     "moment": "^2.29.1",
+    "seedrandom": "^3.0.5",
     "socket.io": "^4.1.2",
     "socket.io-client": "^4.1.2"
   },

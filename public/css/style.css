@@ -20,13 +20,13 @@ li{
 	font-weight: 500;
 }
 .underlined{ text-decoration: underline; text-transform: capitalize;}
-.red { color: rgb(177, 20, 20); }
-.green { color: MediumSeaGreen; }
-.blue{ color: DodgerBlue; }
-.tomato{color:tomato}
-.pink{color:pink}
+.red { background: rgb(177, 20, 20); }
+.green { background: MediumSeaGreen; }
+.blue{ background: DodgerBlue; }
+.tomato{background:tomato}
+.pink{background:pink}
 .active{background:#e6e9ff}
-.active2{background: pink}
+.active2{background: rgb(239, 154, 168)}
 
 body {
 	font-family: 'Roboto', sans-serif;
@@ -182,6 +182,7 @@ a {
 	padding: 30px;
 	height: 1100px;
 	overflow-y: scroll;
+	max-width: 600px;
 	
 }
 
@@ -191,10 +192,13 @@ a {
 	background-color: var(--light-color);
 	border-radius: 5px;
 	overflow-wrap: break-word;
+	color:rgb(18, 11, 95);
+	font-size: 35px;
+	max-width: 600px;
 }
 
 .chat-messages .message .meta {
-	font-size: 15px;
+	font-size: 25px;
 	font-weight: bold;
 	color: var(--dark-color-b);
 	opacity: 0.7;
@@ -208,16 +212,18 @@ a {
 .chat-form-container {
 	padding: 20px 30px;
 	background-color: var(--dark-color-a);
+	
 }
 
 .chat-form-container form {
 	display: flex;
+
 }
 
 .chat-form-container input[type='text'] {
-	font-size: 16px;
+	font-size: 40px;
 	padding: 5px;
-	height: 40px;
+	height: 120px;
 	flex: 1;
 }
 
@@ -269,6 +275,7 @@ a {
 }
 
 .join-main .btn {
+	font-size: 40px;
 	margin-top: 20px;
 	width: 100%;
 }

@@ -21,14 +21,14 @@ const netz =
 {"id":"18","nachbar1":"17","nachbar2":"19","nachbar3":null,"ort1":"9","ort2":"10","ort3":"21"},
 {"id":"19","nachbar1":"20","nachbar2":"18","nachbar3":"39","ort1":"10","ort2":"21","ort3":"22"},
 {"id":"20","nachbar1":"19","nachbar2":null,"nachbar3":null,"ort1":"10","ort2":"11","ort3":"22"},
-{"id":"21","nachbar1":"1","nachbar2":"22","nachbar3":null,"ort1":"11","ort2":"12","ort3":"23"},
-{"id":"22","nachbar1":"42","nachbar2":"23","nachbar3":"21","ort1":"12","ort2":"23","ort3":"24"},
+{"id":"21","nachbar1":"1","nachbar2":"22","nachbar3":null,"ort1":"13","ort2":"12","ort3":"23"},
+{"id":"22","nachbar1":"42","nachbar2":"23","nachbar3":"21","ort1":"13","ort2":"23","ort3":"24"},
 {"id":"23","nachbar1":"3","nachbar2":"24","nachbar3":"22","ort1":"14","ort2":"13","ort3":"24"},
 {"id":"24","nachbar1":"44","nachbar2":"25","nachbar3":"23","ort1":"14","ort2":"24","ort3":"25"},
-{"id":"25","nachbar1":"5","nachbar2":"26","nachbar3":"24","ort1":"14","ort2":"13","ort3":"25"},
-{"id":"26","nachbar1":"46","nachbar2":"27","nachbar3":"25","ort1":"14","ort2":"25","ort3":"26"},
-{"id":"27","nachbar1":"7","nachbar2":"28","nachbar3":"26","ort1":"15","ort2":"14","ort3":"26"},
-{"id":"28","nachbar1":"48","nachbar2":"29","nachbar3":"27","ort1":"15","ort2":"26","ort3":"27"},
+{"id":"25","nachbar1":"5","nachbar2":"26","nachbar3":"24","ort1":"14","ort2":"15","ort3":"25"},
+{"id":"26","nachbar1":"46","nachbar2":"27","nachbar3":"25","ort1":"15","ort2":"25","ort3":"26"},
+{"id":"27","nachbar1":"7","nachbar2":"28","nachbar3":"26","ort1":"15","ort2":"16","ort3":"26"},
+{"id":"28","nachbar1":"48","nachbar2":"29","nachbar3":"27","ort1":"16","ort2":"26","ort3":"27"},
 {"id":"29","nachbar1":"9","nachbar2":"30","nachbar3":"28","ort1":"16","ort2":"15","ort3":"27"},
 {"id":"30","nachbar1":"50","nachbar2":"31","nachbar3":"29","ort1":"16","ort2":"27","ort3":"28"},
 {"id":"31","nachbar1":"11","nachbar2":"32","nachbar3":"30","ort1":"17","ort2":"16","ort3":"28"},
@@ -247,7 +247,7 @@ function buildingPossible(PlaceID)
 {
  let nachbarn = findHood(PlaceID-1)
  nachbarn = removeNull(nachbarn)
- console.log(nachbarn)
+
  let nachbarnVonNachbarn = nachbarn.map(f=>findHood(f-1))
  nachbarnVonNachbarn=extract(nachbarnVonNachbarn)
 
@@ -261,10 +261,10 @@ function findHood(placeId)
       return null;
   }else{
   hood.push(netz[placeId].nachbar1);
-  console.log("hier3")
+
   hood.push(netz[placeId].nachbar2);
   hood.push(netz[placeId].nachbar3);
-  console.log("hood found", hood)
+
   return hood}
 }
 
@@ -295,7 +295,7 @@ function findPlacesAroundArea(Area)
   var places = []
   places = Object.keys(netz).filter(key=>(netz[key].ort1==Area||netz[key].ort2==Area||netz[key].ort3==Area))
   places = places.map(a=>parseInt(a)+1)
-  console.log("found places", places)
+
   return places
 }
 
